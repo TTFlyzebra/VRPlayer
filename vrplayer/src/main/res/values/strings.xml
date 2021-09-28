@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">VRPlayer</string>
+    <string name="sync_button">纯离线语音合成</string>
 </resources>
