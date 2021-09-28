@@ -1,0 +1,3 @@
+rootProject.name = "VRPlayer"
+include ':vrplayer'
+include ':libffplay'

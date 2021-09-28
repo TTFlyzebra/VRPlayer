@@ -1,0 +1,70 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 30
+
+    defaultConfig {
+        minSdkVersion 23
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        externalNativeBuild {
+            cmake {
+                cppFlags "-frtti -fexceptions"
+                abiFilters "arm64-v8a", "armeabi-v7a"
+            }
+        }
+
+        ndk {
+            abiFilters "arm64-v8a", "armeabi-v7a"
+        }
+
+        sourceSets {
+            main {
+                jniLibs.srcDirs = ['src/main/jniLibs']
+            }
+        }
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
+        }
+    }
+
+    // Fix: More than one file was found
+    packagingOptions {
+        pickFirst 'lib/arm64-v8a/libswscale-4.so'
+        pickFirst 'lib/arm64-v8a/libavdevice-57.so'
+        pickFirst 'lib/arm64-v8a/libswresample-2.so'
+        pickFirst 'lib/arm64-v8a/libavcodec-57.so'
+        pickFirst 'lib/arm64-v8a/libavfilter-6.so'
+        pickFirst 'lib/arm64-v8a/libavformat-57.so'
+        pickFirst 'lib/arm64-v8a/libavutil-55.so'
+        pickFirst 'lib/arm64-v8a/libpostproc-54.so'
+        pickFirst 'lib/armeabi-v7a/libswscale-4.so'
+        pickFirst 'lib/armeabi-v7a/libavdevice-57.so'
+        pickFirst 'lib/armeabi-v7a/libswresample-2.so'
+        pickFirst 'lib/armeabi-v7a/libavcodec-57.so'
+        pickFirst 'lib/armeabi-v7a/libavfilter-6.so'
+        pickFirst 'lib/armeabi-v7a/libavformat-57.so'
+        pickFirst 'lib/armeabi-v7a/libavutil-55.so'
+        pickFirst 'lib/armeabi-v7a/libpostproc-54.so'
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+}
